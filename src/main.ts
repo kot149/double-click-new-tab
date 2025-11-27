@@ -35,7 +35,15 @@ function handleClick(event: MouseEvent): void {
 		const href = link.getAttribute('href');
 		if (href) {
 			const absoluteUrl = new URL(href, window.location.href).href;
-			window.location.href = absoluteUrl;
+			const linkTarget = link.getAttribute('target') || '_self';
+
+			// If target is _self or empty, navigate in current tab
+			// Otherwise open in the specified target (new tab, window, etc.)
+			if (linkTarget === '_self' || linkTarget === '') {
+				window.location.href = absoluteUrl;
+			} else {
+				window.open(absoluteUrl, linkTarget);
+			}
 		}
 		isWaitingForDoubleClick = false;
 		clickTimeout = null;
