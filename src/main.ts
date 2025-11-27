@@ -1,11 +1,19 @@
+const DOUBLE_CLICK_TIMEOUT_MS = 250;
+
 let clickTimeout: number | null = null;
 let isWaitingForDoubleClick = false;
+let isSingleClickExecuted = false;
 
 function handleClick(event: MouseEvent): void {
 	const target = event.target as HTMLElement;
 	const link = target.closest('a[href]') as HTMLAnchorElement;
 
 	if (!link) {
+		return;
+	}
+
+	if (isSingleClickExecuted) {
+		isSingleClickExecuted = false;
 		return;
 	}
 
@@ -23,21 +31,11 @@ function handleClick(event: MouseEvent): void {
 	}
 
 	clickTimeout = window.setTimeout(() => {
-		// Single click detected
-		const href = link.getAttribute('href');
-		if (href) {
-			const absoluteUrl = new URL(href, window.location.href).href;
-			const linkTarget = link.getAttribute('target') || '_self';
-
-			if (linkTarget === '_self' || linkTarget === '') {
-				window.location.href = absoluteUrl;
-			} else {
-				window.open(absoluteUrl, linkTarget);
-			}
-		}
+		isSingleClickExecuted = true;
+		link.click();
 		isWaitingForDoubleClick = false;
 		clickTimeout = null;
-	}, 300);
+	}, DOUBLE_CLICK_TIMEOUT_MS);
 }
 
 function handleDoubleClick(event: MouseEvent): void {
