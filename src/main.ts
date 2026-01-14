@@ -13,7 +13,6 @@ function handleClick(event: MouseEvent): void {
 	}
 
 	if (isSingleClickExecuted) {
-		isSingleClickExecuted = false;
 		return;
 	}
 
