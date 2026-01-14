@@ -66,9 +66,26 @@ function handleDoubleClick(event: MouseEvent): void {
 	window.open(absoluteUrl, '_blank');
 }
 
+function handleNonLinkClick(event: MouseEvent): void {
+	const target = event.target as HTMLElement;
+	if (target.closest('a')) {
+	document.addEventListener('click', handleNonLinkClick, true);
+		return;
+	}
+
+	// Reset state when clicking non-link elements
+	isWaitingForDoubleClick = false;
+	isSingleClickExecuted = false;
+	if (clickTimeout !== null) {
+		clearTimeout(clickTimeout);
+		clickTimeout = null;
+	}
+}
+
 function init(): void {
 	document.addEventListener('dblclick', handleDoubleClick, true);
 	document.addEventListener('click', handleClick, true);
+	document.addEventListener('click', handleNonLinkClick, true);
 	console.log('Double-Click New Tab UserScript loaded successfully');
 }
 
