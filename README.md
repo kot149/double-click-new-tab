@@ -2,6 +2,12 @@
 
 A UserScript to double-click a link to open it in a new tab.
 
+# Features
+
+- Double-click a link to open it in a new tab
+- Single-click a link to open it in the current tab, while respecting `target="_blank"` attribute and other existing event listeners
+- Ignores links with `data:` protocol
+
 ## Installation
 
 1. Install [Tampermonkey](https://tampermonkey.net/)
