@@ -8,7 +8,7 @@ function handleClick(event: MouseEvent): void {
 	const target = event.target as HTMLElement;
 	const link = target.closest('a[href]') as HTMLAnchorElement;
 
-	if (!link) {
+	if (!link || link.href.startsWith('data:')) {
 		return;
 	}
 
@@ -42,7 +42,7 @@ function handleDoubleClick(event: MouseEvent): void {
 	const target = event.target as HTMLElement;
 	const link = target.closest('a[href]') as HTMLAnchorElement;
 
-	if (!link) {
+	if (!link || link.href.startsWith('data:')) {
 		return;
 	}
 
