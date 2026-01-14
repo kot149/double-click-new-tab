@@ -72,7 +72,6 @@ function handleDoubleClick(event: MouseEvent): void {
 function handleNonLinkClick(event: MouseEvent): void {
 	const target = event.target as HTMLElement;
 	if (target.closest('a')) {
-	document.addEventListener('click', handleNonLinkClick, true);
 		return;
 	}
 
