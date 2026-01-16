@@ -34,8 +34,8 @@ function handleClick(event: MouseEvent): void {
 		link.click();
 		setTimeout(() => {
 			isSingleClickExecuted = false;
+			isWaitingForDoubleClick = false;
 		}, DOUBLE_CLICK_TIMEOUT_MS);
-		isWaitingForDoubleClick = false;
 		clickTimeout = null;
 	}, DOUBLE_CLICK_TIMEOUT_MS);
 }
