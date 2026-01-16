@@ -8,7 +8,7 @@ function handleClick(event: MouseEvent): void {
 	const target = event.target as HTMLElement;
 	const link = target.closest('a[href]') as HTMLAnchorElement;
 
-	if (!link || link.href.startsWith('data:') || link.href.startsWith('javascript:')) {
+	if (!link || link.href.startsWith('data:') || link.href.startsWith('javascript:') || link.target === '_blank') {
 		return;
 	}
 
